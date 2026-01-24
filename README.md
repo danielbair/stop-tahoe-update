@@ -112,11 +112,23 @@ git clone https://github.com/travisvn/stop-tahoe-update.git
 cd stop-tahoe-update
 ```
 
+Ensure the scripts are executable
+```bash
+# Ensure scripts are executable (just in case)
+chmod +x ./scripts/*.sh
+```
+
 ### 2. Apply a 90-day deferral profile
+
+The script will generate unique identifiers to prevent conflicts and attempt to install the profile.
 
 ```bash
 ./scripts/install-profile.sh profiles/deferral-90days.mobileconfig
+
 ```
+
+> [!NOTE]
+> On recent macOS versions, silent installation may be blocked. If the script opens **System Settings**, please locate the **"Profiles"** (or "Downloaded Profile") notification and click **Install** manually to complete the process.
 
 ### 3. Verify status
 
