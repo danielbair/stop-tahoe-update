@@ -8,7 +8,7 @@
       <key>PayloadType</key><string>com.apple.applicationaccess</string>
       <key>PayloadVersion</key><integer>1</integer>
       <key>PayloadIdentifier</key><string>org.stayonsequoia.restrictions</string>
-      <key>PayloadUUID</key><string>REPLACE-WITH-UUID</string>
+      <key>PayloadUUID</key><string>PAYLOAD-UUID</string>
       <key>PayloadEnabled</key><true/>
       <key>PayloadDisplayName</key><string>Software Update Deferrals</string>
 
@@ -26,7 +26,7 @@
   <key>PayloadType</key><string>Configuration</string>
   <key>PayloadVersion</key><integer>1</integer>
   <key>PayloadIdentifier</key><string>org.stayonsequoia.profile</string>
-  <key>PayloadUUID</key><string>REPLACE-WITH-UUID</string>
+  <key>PayloadUUID</key><string>PROFILE-UUID</string>
   <key>PayloadDisplayName</key><string>Stay on Sequoia: Update Deferrals</string>
   <key>PayloadOrganization</key><string>StayOnSequoia Community</string>
 </dict>

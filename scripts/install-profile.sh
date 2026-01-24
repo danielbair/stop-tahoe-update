@@ -7,8 +7,26 @@ if [[ ! -f "$PROFILE" ]]; then
   exit 1
 fi
 
+# Generate two distinct UUIDs
+UUID1=$(uuidgen)
+UUID2=$(uuidgen)
+
+# Create profile with UUIDs inserted
+TEMP_DIR=$(mktemp -d)
+TEMP_PROFILE="$TEMP_DIR/profile.mobileconfig"
+trap 'rm -rf "$TEMP_DIR"' EXIT
+sed -e "s/PAYLOAD-UUID/$UUID1/" -e "s/PROFILE-UUID/$UUID2/" "$PROFILE" > "$TEMP_PROFILE"
+
 echo "Installing profile: $PROFILE"
-# macOS still ships the `profiles` CLI; use the UI if this fails.
-sudo /usr/bin/profiles install -type configuration -path "$PROFILE" \
-  || open "$PROFILE"
-echo "Done. You may need to open System Settings → Privacy & Security → Profiles to approve."
+echo "  Payload UUID: $UUID1"
+echo "  Profile UUID: $UUID2"
+
+# Try CLI first; fall back to UI if it fails
+if sudo /usr/bin/profiles install -type configuration -path "$TEMP_PROFILE" 2>/dev/null; then
+  echo "Done. Check System Settings → Privacy & Security → Profiles to verify."
+else
+  echo "Opening profile in System Settings for manual approval..."
+  open "$TEMP_PROFILE"
+  echo "Press Enter after you've approved (or declined) the profile in System Settings."
+  read -r
+fi
