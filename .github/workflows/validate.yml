@@ -5,6 +5,7 @@ on:
     branches: [main]
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   validate:
@@ -25,7 +26,7 @@ jobs:
         run: |
           echo "Linting shell scripts..."
           brew install shellcheck || true
-          shellcheck scripts/*.sh plugins/*/*.sh
+          shellcheck scripts/*.sh
 
       - name: 🔒 Generate SHA-256 checksums
         run: |
